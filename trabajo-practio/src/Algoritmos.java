@@ -21,11 +21,11 @@ public class Algoritmos {
     private static void backtrack(List<String> actual, int suma, int objetivo, List<Maquina> maquinas, Solucion mejor, int[] costo) {
         costo[0]++;
         if (suma == objetivo) {
-            if (mejor.secuencia.isEmpty() || actual.size() < mejor.puestasEnFuncionamiento) {
-                mejor.secuencia = new ArrayList<>(actual);
-                mejor.totalPiezas = suma;
-                mejor.puestasEnFuncionamiento = actual.size();
-                mejor.costo = costo[0];
+            if (mejor.getSecuencia().isEmpty() || actual.size() < mejor.getPuestasEnFuncionamiento()) {
+                mejor.setSecuencia(new ArrayList<>(actual));
+                mejor.setTotalPiezas(suma);
+                mejor.setPuestasEnFuncionamiento(actual.size());
+                mejor.setCosto(costo[0]);
             }
             return;
         }
@@ -33,8 +33,8 @@ public class Algoritmos {
         if (suma > objetivo) return;
 
         for (Maquina m : maquinas) {
-            actual.add(m.nombre);
-            backtrack(actual, suma + m.piezas, objetivo, maquinas, mejor, costo);
+            actual.add(m.getNombre());
+            backtrack(actual, suma + m.getPiezas(), objetivo, maquinas, mejor, costo);
             actual.remove(actual.size() - 1);
         }
     }
@@ -54,17 +54,17 @@ public class Algoritmos {
         while (restante > 0) {
             Maquina mejor = null;
             for (Maquina m : maquinas) {
-                sol.costo++;
-                if (m.piezas <= restante && (mejor == null || m.piezas > mejor.piezas)) {
+                sol.setCosto(sol.getCosto() + 1); // se incrementa por cada candidato considerado
+                if (m.getPiezas() <= restante && (mejor == null || m.getPiezas() > mejor.getPiezas())) {
                     mejor = m;
                 }
             }
             if (mejor == null) break;
 
-            sol.secuencia.add(mejor.nombre);
-            sol.totalPiezas += mejor.piezas;
-            sol.puestasEnFuncionamiento++;
-            restante -= mejor.piezas;
+            sol.agregarMaquina(mejor.getNombre());
+            sol.setTotalPiezas(sol.getTotalPiezas() + mejor.getPiezas());
+            sol.setPuestasEnFuncionamiento(sol.getPuestasEnFuncionamiento() + 1);
+            restante -= mejor.getPiezas();
         }
 
         return sol;

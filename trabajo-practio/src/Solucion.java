@@ -2,16 +2,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solucion {
-    protected List<String> secuencia;
-    protected int totalPiezas;
-    protected int puestasEnFuncionamiento;
-    protected int costo;
+    private List<String> secuencia;
+    private int totalPiezas;
+    private int puestasEnFuncionamiento;
+    private int costo;
 
     public Solucion(){
         this.secuencia = new ArrayList<String>();
         this.totalPiezas = 0;
         this.puestasEnFuncionamiento = 0;
         this.costo = 0;
+    }
+    public List<String> getSecuencia() {
+        return secuencia;
+    }
+
+    public void setSecuencia(List<String> secuencia) {
+        this.secuencia = secuencia;
+    }
+
+    public void agregarMaquina(String nombre) {
+        this.secuencia.add(nombre);
+    }
+
+    public int getTotalPiezas() {
+        return totalPiezas;
+    }
+
+    public void setTotalPiezas(int totalPiezas) {
+        this.totalPiezas = totalPiezas;
+    }
+
+    public int getPuestasEnFuncionamiento() {
+        return puestasEnFuncionamiento;
+    }
+
+    public void setPuestasEnFuncionamiento(int puestas) {
+        this.puestasEnFuncionamiento = puestas;
+    }
+
+    public int getCosto() {
+        return costo;
+    }
+
+    public void setCosto(int costo) {
+        this.costo = costo;
     }
 
     public void mostrar(String metodo) {
